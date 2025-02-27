@@ -1,9 +1,5 @@
-'''
-conda activate zero123
-cd stable-diffusion
-python gradio_new.py 0
-'''
-
+import os
+import shutil
 import diffusers  # 0.12.1
 import math
 import fire
@@ -30,15 +26,14 @@ from rich import print
 from transformers import AutoFeatureExtractor #, CLIPImageProcessor
 from torch import autocast
 from torchvision import transforms
-import os
-os.environ['GRADIO_TEMP_DIR'] = "/tmp2/danzel/zero123/temp_gradio"
+import argparse
 
 
 _SHOW_DESC = True
 _SHOW_INTERMEDIATE = False
 # _SHOW_INTERMEDIATE = True
-_GPU_INDEX = 4
-# _GPU_INDEX = 2
+# _GPU_INDEX = 3
+_GPU_INDEX = 0
 
 # _TITLE = 'Zero-Shot Control of Camera Viewpoints within a Single Image'
 _TITLE = 'Zero-1-to-3: Zero-shot One Image to 3D Object'
@@ -319,19 +314,18 @@ def main_run(models, device, cam_vis, return_what,
     '''
     :param raw_im (PIL Image).
     '''
-        # Print all the parameters
-    print(f"device: {device}")
-    print(f"cam_vis: {cam_vis}")
-    print(f"return_what: {return_what}")
-    print(f"x: {x}, y: {y}, z: {z}")
-    print(f"raw_im: {raw_im}")
-    print(f"preprocess: {preprocess}")
-    print(f"scale: {scale}")
-    print(f"n_samples: {n_samples}")
-    print(f"ddim_steps: {ddim_steps}")
-    print(f"ddim_eta: {ddim_eta}")
-    print(f"precision: {precision}")
-    print(f"h: {h}, w: {w}")
+    # print(f"device: {device}")
+    # print(f"cam_vis: {cam_vis}")
+    # print(f"return_what: {return_what}")
+    # print(f"x: {x}, y: {y}, z: {z}")
+    # print(f"raw_im: {raw_im}")
+    # print(f"preprocess: {preprocess}")
+    # print(f"scale: {scale}")
+    # print(f"n_samples: {n_samples}")
+    # print(f"ddim_steps: {ddim_steps}")
+    # print(f"ddim_eta: {ddim_eta}")
+    # print(f"precision: {precision}")
+    # print(f"h: {h}, w: {w}")
 
     raw_im.thumbnail([1536, 1536], Image.Resampling.LANCZOS)
     safety_checker_input = models['clip_fe'](raw_im, return_tensors='pt').to(device)
@@ -479,17 +473,14 @@ def calc_cam_cone_pts_3d(polar_deg, azimuth_deg, radius_m, fov_deg):
 
     return np.array([xs, ys, zs]).T
 
-
-def run_demo(
+def process_images(
+        input_folder, output_folder,
         device_idx=_GPU_INDEX,
         ckpt='105000.ckpt',
         config='configs/sd-objaverse-finetune-c_concat-256.yaml'):
-
-    print('sys.argv:', sys.argv)
-    if len(sys.argv) > 1:
-        print('old device_idx:', device_idx)
-        device_idx = int(sys.argv[1])
-        print('new device_idx:', device_idx)
+    
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
 
     device = f'cuda:{device_idx}'
     config = OmegaConf.load(config)
@@ -507,173 +498,82 @@ def run_demo(
     models['clip_fe'] = AutoFeatureExtractor.from_pretrained(
         'CompVis/stable-diffusion-safety-checker')
 
-    # Reduce NSFW false positives.
-    # NOTE: At the time of writing, and for diffusers 0.12.1, the default parameters are:
-    # models['nsfw'].concept_embeds_weights:
-    # [0.1800, 0.1900, 0.2060, 0.2100, 0.1950, 0.1900, 0.1940, 0.1900, 0.1900, 0.2200, 0.1900,
-    #  0.1900, 0.1950, 0.1984, 0.2100, 0.2140, 0.2000].
-    # models['nsfw'].special_care_embeds_weights:
-    # [0.1950, 0.2000, 0.2200].
-    # We multiply all by some factor > 1 to make them less likely to be triggered.
     models['nsfw'].concept_embeds_weights *= 1.07
     models['nsfw'].special_care_embeds_weights *= 1.07
 
-    with open('instructions.md', 'r') as f:
-        article = f.read()
+    cam_vis = CameraVisualizer(None)
+    
+    for folder_name in os.listdir(input_folder):
+        print(f'Processing {folder_name}...')
+        # if folder_name != 'shoe':
+        #     continue
+        folder_path = os.path.join(input_folder, folder_name)
+        if not os.path.isdir(folder_path):
+            continue
+        
+        image_path = None
+        for image_file in ['input.jpg', 'input.png']:
+            potential_image_path = os.path.join(folder_path, image_file)
+            if os.path.isfile(potential_image_path):
+                image_path = potential_image_path
+                break
+        
+        if image_path is None:
+            print(f'No input image found in {folder_name}. Skipping...')
+            continue
+        if not os.path.isfile(image_path):
+            continue
+        
+        output_image_folder = os.path.join(output_folder, os.path.splitext(folder_name)[0])
+        print(f'Output folder: {output_image_folder}')
+        if not os.path.exists(output_image_folder):
+            os.makedirs(output_image_folder)
+        
+        # image = gr.Image(type='pil', image_mode='RGBA')
+        # image.value = image_path
+        image = Image.open(image_path).convert("RGBA")
 
-    # Compose demo layout & data flow.
-    demo = gr.Blocks(title=_TITLE)
-
-    with demo:
-        gr.Markdown('# ' + _TITLE)
-        gr.Markdown(_DESCRIPTION)
-
-        with gr.Row():
-            with gr.Column(scale=0.9, variant='panel'):
-
-                image_block = gr.Image(type='pil', image_mode='RGBA',
-                                       label='Input image of single object')
-                preprocess_chk = gr.Checkbox(
-                    True, label='Preprocess image automatically (remove background and recenter object)')
-                # info='If enabled, the uploaded image will be preprocessed to remove the background and recenter the object by cropping and/or padding as necessary. '
-                # 'If disabled, the image will be used as-is, *BUT* a fully transparent or white background is required.'),
-
-                gr.Markdown('*Try camera position presets:*')
-                with gr.Row():
-                    left_btn = gr.Button('View from the Left', variant='primary')
-                    above_btn = gr.Button('View from Above', variant='primary')
-                    right_btn = gr.Button('View from the Right', variant='primary')
-                with gr.Row():
-                    random_btn = gr.Button('Random Rotation', variant='primary')
-                    below_btn = gr.Button('View from Below', variant='primary')
-                    behind_btn = gr.Button('View from Behind', variant='primary')
-
-                gr.Markdown('*Control camera position manually:*')
-                polar_slider = gr.Slider(
-                    -90, 90, value=0, step=5, label='Polar angle (vertical rotation in degrees)')
-                # info='Positive values move the camera down, while negative values move the camera up.')
-                azimuth_slider = gr.Slider(
-                    -180, 180, value=0, step=5, label='Azimuth angle (horizontal rotation in degrees)')
-                # info='Positive values move the camera right, while negative values move the camera left.')
-                radius_slider = gr.Slider(
-                    -0.5, 0.5, value=0.0, step=0.1, label='Zoom (relative distance from center)')
-                # info='Positive values move the camera further away, while negative values move the camera closer.')
-
-                samples_slider = gr.Slider(1, 8, value=4, step=1,
-                                           label='Number of samples to generate')
-
-                with gr.Accordion('Advanced options', open=False):
-                    scale_slider = gr.Slider(0, 30, value=3, step=1,
-                                             label='Diffusion guidance scale')
-                    steps_slider = gr.Slider(5, 200, value=75, step=5,
-                                             label='Number of diffusion inference steps')
-
-                with gr.Row():
-                    vis_btn = gr.Button('Visualize Angles', variant='secondary')
-                    run_btn = gr.Button('Run Generation', variant='primary')
-
-                desc_output = gr.Markdown('The results will appear on the right.', visible=_SHOW_DESC)
-
-            with gr.Column(scale=1.1, variant='panel'):
-
-                vis_output = gr.Plot(
-                    label='Relationship between input (green) and output (blue) camera poses')
-
-                gen_output = gr.Gallery(label='Generated images from specified new viewpoint')
-                gen_output.style(grid=2)
-
-                preproc_output = gr.Image(type='pil', image_mode='RGB',
-                                          label='Preprocessed input image', visible=_SHOW_INTERMEDIATE)
-
-        gr.Markdown(article)
-
-        # NOTE: I am forced to update vis_output for these preset buttons,
-        # because otherwise the gradio plot always resets the plotly 3D viewpoint for some reason,
-        # which might confuse the user into thinking that the plot has been updated too.
-
-        # OLD 1:
-        # left_btn.click(fn=lambda: [0.0, -90.0], #, 0.0],
-        #                inputs=[], outputs=[polar_slider, azimuth_slider]), #], radius_slider])
-        # above_btn.click(fn=lambda: [90.0, 0.0], #, 0.0],
-        #                 inputs=[], outputs=[polar_slider, azimuth_slider]), #, radius_slider])
-        # right_btn.click(fn=lambda: [0.0, 90.0], #, 0.0],
-        #                 inputs=[], outputs=[polar_slider, azimuth_slider]), #, radius_slider])
-        # random_btn.click(fn=lambda: [int(np.round(np.random.uniform(-60.0, 60.0))),
-        #                              int(np.round(np.random.uniform(-150.0, 150.0)))], #, 0.0],
-        #                 inputs=[], outputs=[polar_slider, azimuth_slider]), #, radius_slider])
-        # below_btn.click(fn=lambda: [-90.0, 0.0], #, 0.0],
-        #                 inputs=[], outputs=[polar_slider, azimuth_slider]), #, radius_slider])
-        # behind_btn.click(fn=lambda: [0.0, 180.0], #, 0.0],
-        #                  inputs=[], outputs=[polar_slider, azimuth_slider]), #, radius_slider])
-
-        # OLD 2:
-        # preset_text = ('You have selected a preset target camera view. '
-        #                'Now click Run Generation to update the results!')
-
-        # left_btn.click(fn=lambda: [0.0, -90.0, None, preset_text],
-        #                inputs=[], outputs=[polar_slider, azimuth_slider, vis_output, desc_output])
-        # above_btn.click(fn=lambda: [90.0, 0.0, None, preset_text],
-        #                 inputs=[], outputs=[polar_slider, azimuth_slider, vis_output, desc_output])
-        # right_btn.click(fn=lambda: [0.0, 90.0, None, preset_text],
-        #                 inputs=[], outputs=[polar_slider, azimuth_slider, vis_output, desc_output])
-        # random_btn.click(fn=lambda: [int(np.round(np.random.uniform(-60.0, 60.0))),
-        #                              int(np.round(np.random.uniform(-150.0, 150.0))),
-        #                              None, preset_text],
-        #                 inputs=[], outputs=[polar_slider, azimuth_slider, vis_output, desc_output])
-        # below_btn.click(fn=lambda: [-90.0, 0.0, None, preset_text],
-        #                 inputs=[], outputs=[polar_slider, azimuth_slider, vis_output, desc_output])
-        # behind_btn.click(fn=lambda: [0.0, 180.0, None, preset_text],
-        #                  inputs=[], outputs=[polar_slider, azimuth_slider, vis_output, desc_output])
-
-        # OLD 3 (does not work at all):
-        # def a():
-        #     polar_slider.value = 77.7
-        #     polar_slider.postprocess(77.7)
-        #     print('testa')
-        # left_btn.click(fn=a)
-
-        cam_vis = CameraVisualizer(vis_output)
-
-        vis_btn.click(fn=partial(main_run, models, device, cam_vis, 'vis'),
-                      inputs=[polar_slider, azimuth_slider, radius_slider,
-                              image_block, preprocess_chk],
-                      outputs=[desc_output, vis_output, preproc_output])
-
-        run_btn.click(fn=partial(main_run, models, device, cam_vis, 'gen'),
-                      inputs=[polar_slider, azimuth_slider, radius_slider,
-                              image_block, preprocess_chk,
-                              scale_slider, samples_slider, steps_slider],
-                      outputs=[desc_output, vis_output, preproc_output, gen_output])
-
-        # NEW:
-        preset_inputs = [image_block, preprocess_chk,
-                         scale_slider, samples_slider, steps_slider]
-        preset_outputs = [polar_slider, azimuth_slider, radius_slider,
-                          desc_output, vis_output, preproc_output, gen_output]
-        print(f'present_inputs: {preset_inputs}')
-        print(f'present_outputs: {preset_outputs}')
-        left_btn.click(fn=partial(main_run, models, device, cam_vis, 'angles_gen',
-                                  0.0, -90.0, 0.0),
-                       inputs=preset_inputs, outputs=preset_outputs)
-        above_btn.click(fn=partial(main_run, models, device, cam_vis, 'angles_gen',
-                                   -90.0, 0.0, 0.0),
-                       inputs=preset_inputs, outputs=preset_outputs)
-        right_btn.click(fn=partial(main_run, models, device, cam_vis, 'angles_gen',
-                                   0.0, 90.0, 0.0),
-                       inputs=preset_inputs, outputs=preset_outputs)
-        random_btn.click(fn=partial(main_run, models, device, cam_vis, 'rand_angles_gen',
-                                    -1.0, -1.0, -1.0),
-                       inputs=preset_inputs, outputs=preset_outputs)
-        below_btn.click(fn=partial(main_run, models, device, cam_vis, 'angles_gen',
-                                   90.0, 0.0, 0.0),
-                       inputs=preset_inputs, outputs=preset_outputs)
-        behind_btn.click(fn=partial(main_run, models, device, cam_vis, 'angles_gen',
-                                    0.0, 180.0, 0.0),
-                       inputs=preset_inputs, outputs=preset_outputs)
-
-    demo.launch(enable_queue=True, share=True)
+        preset_inputs = [image, True, 3]
+        n_samples=4
+        ddim_steps = 75
+        preset_outputs = []
+        
+        angles = [(0.0, -90.0, 0.0, 'left'), (0.0, 90.0, 0.0, 'right'), (0.0, 180.0, 0.0, 'behind')]
+        print(f'Generating images for angles {angles[0][:3]}')
+        for angle in angles:
+            # print(*angle[:3])
+            # print(*preset_inputs)
+            #return (x, y, z, description, new_fig, show_in_im2, output_ims)
+            preset_outputs = main_run(models, device, cam_vis, 'angles_gen', *angle[:3], *preset_inputs, n_samples=n_samples, ddim_steps=ddim_steps)
+            # for output in preset_outputs:
+            #     print(type(output))
+            angle_output_folder = os.path.join(output_image_folder, angle[3])
+            if not os.path.exists(angle_output_folder):
+                os.makedirs(angle_output_folder)
+            
+            for i, img in enumerate(preset_outputs[6]):
+                if i >= 4:
+                    break
+                output_image_path = os.path.join(angle_output_folder, f'{i}.png')
+                # Save generated image to the output folder
+                img.save(output_image_path)
+            # for i, img in enumerate(preset_outputs[6]):
+            #     if i >= 4:
+            #         break
+            #     output_image_path = os.path.join(output_image_folder, f'{angle[3]}_{i}.png')
+            #     # Save generated image to the output folder
+            #     img.save(output_image_path)
+            #     # shutil.copy(img, output_image_path)
+        
+    print('Processing complete!')
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Process images with the model.')
+    parser.add_argument("--input_folder", type=str, required=True, help='Path to the input folder containing images.')
+    parser.add_argument("--output_folder", type=str, required=True, help='Path to the output folder to save processed images.')
+    args = parser.parse_args()
 
-    fire.Fire(run_demo)
+    input_folder = args.input_folder
+    output_folder = args.output_folder
+    process_images(input_folder, output_folder)
