@@ -1,0 +1,11 @@
+# python config files
+/__pycache__
+
+# model weights
+*.pth
+
+#grounding dino
+/GroundingDINO
+
+#dataset
+/test_images
