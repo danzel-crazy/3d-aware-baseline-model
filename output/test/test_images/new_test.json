@@ -1,0 +1,20 @@
+{
+    "move_cube": [
+        "edit_000",
+        "edit_001",
+        "edit_002",
+        "edit_003"
+    ],
+    "rotate_faucet": [
+        "edit_000",
+        "edit_001",
+        "edit_002",
+        "edit_003"
+    ],
+    "rotate_mug": [
+        "edit_000",
+        "edit_001",
+        "edit_002",
+        "edit_003"
+    ]
+}

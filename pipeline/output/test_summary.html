@@ -1,0 +1,187 @@
+<!-- BEGIN: results_template.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diffusion Handles Test Set Results</title>
+</head>
+<style>
+table { 
+    table-layout:fixed;
+    width:100%;
+}
+img {
+    max-height:100%;
+    max-width:100%;
+}
+thead th {
+    top: 0;
+    position: sticky;
+    z-index: 20;
+    background-color: white;
+}
+</style>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Input</th>
+                <th>Mask</th>
+                <th>Depth</th>
+                <th>Background</th>
+                <th>Bg. Depth</th>
+                <th>Inverted</th>
+                <th>Edit</th>
+                <th>Edit Disparity</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><img src="./blue_cube/input.png"></td>
+                <td><img src="./blue_cube/mask.png"></td>
+                <td><img src="./blue_cube/depth.png"></td>
+                <td><img src="./blue_cube/bg.png"></td>
+                <td><img src="./blue_cube/bg_depth.png"></td>
+                <td><img src="./blue_cube/recon.png"></td>
+                <td><img src="./blue_cube/edit_000.png"></td>
+                <td><img src="./blue_cube/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./blue_cube/input.png"></td>
+                <td><img src="./blue_cube/mask.png"></td>
+                <td><img src="./blue_cube/depth.png"></td>
+                <td><img src="./blue_cube/bg.png"></td>
+                <td><img src="./blue_cube/bg_depth.png"></td>
+                <td><img src="./blue_cube/recon.png"></td>
+                <td><img src="./blue_cube/edit_001.png"></td>
+                <td><img src="./blue_cube/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./blue_cube/input.png"></td>
+                <td><img src="./blue_cube/mask.png"></td>
+                <td><img src="./blue_cube/depth.png"></td>
+                <td><img src="./blue_cube/bg.png"></td>
+                <td><img src="./blue_cube/bg_depth.png"></td>
+                <td><img src="./blue_cube/recon.png"></td>
+                <td><img src="./blue_cube/edit_002.png"></td>
+                <td><img src="./blue_cube/edit_002_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./blue_cube/input.png"></td>
+                <td><img src="./blue_cube/mask.png"></td>
+                <td><img src="./blue_cube/depth.png"></td>
+                <td><img src="./blue_cube/bg.png"></td>
+                <td><img src="./blue_cube/bg_depth.png"></td>
+                <td><img src="./blue_cube/recon.png"></td>
+                <td><img src="./blue_cube/edit_003.png"></td>
+                <td><img src="./blue_cube/edit_003_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./blue_faucet/input.png"></td>
+                <td><img src="./blue_faucet/mask.png"></td>
+                <td><img src="./blue_faucet/depth.png"></td>
+                <td><img src="./blue_faucet/bg.png"></td>
+                <td><img src="./blue_faucet/bg_depth.png"></td>
+                <td><img src="./blue_faucet/recon.png"></td>
+                <td><img src="./blue_faucet/edit_000.png"></td>
+                <td><img src="./blue_faucet/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./blue_faucet/input.png"></td>
+                <td><img src="./blue_faucet/mask.png"></td>
+                <td><img src="./blue_faucet/depth.png"></td>
+                <td><img src="./blue_faucet/bg.png"></td>
+                <td><img src="./blue_faucet/bg_depth.png"></td>
+                <td><img src="./blue_faucet/recon.png"></td>
+                <td><img src="./blue_faucet/edit_001.png"></td>
+                <td><img src="./blue_faucet/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./blue_faucet/input.png"></td>
+                <td><img src="./blue_faucet/mask.png"></td>
+                <td><img src="./blue_faucet/depth.png"></td>
+                <td><img src="./blue_faucet/bg.png"></td>
+                <td><img src="./blue_faucet/bg_depth.png"></td>
+                <td><img src="./blue_faucet/recon.png"></td>
+                <td><img src="./blue_faucet/edit_002.png"></td>
+                <td><img src="./blue_faucet/edit_002_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./blue_faucet/input.png"></td>
+                <td><img src="./blue_faucet/mask.png"></td>
+                <td><img src="./blue_faucet/depth.png"></td>
+                <td><img src="./blue_faucet/bg.png"></td>
+                <td><img src="./blue_faucet/bg_depth.png"></td>
+                <td><img src="./blue_faucet/recon.png"></td>
+                <td><img src="./blue_faucet/edit_003.png"></td>
+                <td><img src="./blue_faucet/edit_003_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./white_mug/input.png"></td>
+                <td><img src="./white_mug/mask.png"></td>
+                <td><img src="./white_mug/depth.png"></td>
+                <td><img src="./white_mug/bg.png"></td>
+                <td><img src="./white_mug/bg_depth.png"></td>
+                <td><img src="./white_mug/recon.png"></td>
+                <td><img src="./white_mug/edit_000.png"></td>
+                <td><img src="./white_mug/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./white_mug/input.png"></td>
+                <td><img src="./white_mug/mask.png"></td>
+                <td><img src="./white_mug/depth.png"></td>
+                <td><img src="./white_mug/bg.png"></td>
+                <td><img src="./white_mug/bg_depth.png"></td>
+                <td><img src="./white_mug/recon.png"></td>
+                <td><img src="./white_mug/edit_001.png"></td>
+                <td><img src="./white_mug/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./white_mug/input.png"></td>
+                <td><img src="./white_mug/mask.png"></td>
+                <td><img src="./white_mug/depth.png"></td>
+                <td><img src="./white_mug/bg.png"></td>
+                <td><img src="./white_mug/bg_depth.png"></td>
+                <td><img src="./white_mug/recon.png"></td>
+                <td><img src="./white_mug/edit_002.png"></td>
+                <td><img src="./white_mug/edit_002_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./white_mug/input.png"></td>
+                <td><img src="./white_mug/mask.png"></td>
+                <td><img src="./white_mug/depth.png"></td>
+                <td><img src="./white_mug/bg.png"></td>
+                <td><img src="./white_mug/bg_depth.png"></td>
+                <td><img src="./white_mug/recon.png"></td>
+                <td><img src="./white_mug/edit_003.png"></td>
+                <td><img src="./white_mug/edit_003_disparity.png"></td>
+                
+            </tr>
+            
+        </tbody>
+    </table>
+</body>
+</html>
+<!-- END: results_template.html -->

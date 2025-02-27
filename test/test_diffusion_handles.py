@@ -15,6 +15,21 @@ from estimate_depth import estimate_depth
 from generate_results_webpage import generate_results_webpage
 from utils import crop_and_resize, load_image, load_depth, save_image
 
+if torch.cuda.is_available():
+    print(f"Current GPU device ID: {torch.cuda.current_device()}")
+else:
+    print("No GPU available")
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--test_set_path', type=str, default='data/photogen/photogen.json')
+    parser.add_argument('--input_dir', type=str, default='data/photogen')
+    parser.add_argument('--output_dir', type=str, default='results/photogen')
+    parser.add_argument('--skip_existing', action='store_true')
+    parser.add_argument('--cache_input_image_identity', action='store_true')
+    parser.add_argument('--config_path', type=str, default=None)
+    parser.add_argument('--device', type=str, default=None)
+    return parser.parse_args()
 
 def test_diffusion_handles(
         test_set_path:str, input_dir:str, output_dir:str,
@@ -27,6 +42,14 @@ def test_diffusion_handles(
         device = torch.device(device)
 
     img_res = 512
+    args = parse_args()
+    args.test_set_path = test_set_path
+    args.input_dir = input_dir
+    args.output_dir = output_dir
+    args.skip_existing = skip_existing
+    args.cache_input_image_identity = cache_input_image_identity
+    args.config_path = config_path
+    args.device = device
 
     # # TEMP!
     # # need to:
@@ -42,6 +65,7 @@ def test_diffusion_handles(
     # load the test set info
     with open(test_set_path, 'r') as f:
         dataset_names = json.load(f, object_pairs_hook=OrderedDict)
+        print(dataset_names)
 
     preprocess_samples(input_dir=input_dir, dataset_names=dataset_names)
 
@@ -172,10 +196,16 @@ def preprocess_samples(input_dir, dataset_names):
     depth_estimation_samples = []
     for sample_name in dataset_names.keys():
         required_fnames = ['input.png', 'mask.png', 'prompt.txt', 'transforms.json']
-        if any(not exists(join(input_dir, sample_name, fname)) for fname in required_fnames):
-            print(f"Skipping sample {sample_name}, since it is missing one of the required input files ({required_fnames}).")
+        missing_files = [fname for fname in required_fnames if not exists(join(input_dir, sample_name, fname))]
+        if missing_files:
+            print(f"Skipping sample {sample_name}, since it is missing the following required input files: {missing_files}.")
             incomplete_samples.append(sample_name)
             continue
+        
+        # if any(not exists(join(input_dir, sample_name, fname)) for fname in required_fnames):    
+        #     print(f"Skipping sample {sample_name}, since it is missing one of the required input files ({required_fnames}).")
+        #     incomplete_samples.append(sample_name)
+        #     continue
         if not exists(join(input_dir, sample_name, 'bg_depth.exr')) and not exists(join(input_dir, sample_name, 'bg.png')):
             foreground_removal_samples.append(sample_name)
         if not exists(join(input_dir, sample_name, 'depth.exr')) or not exists(join(input_dir, sample_name, 'bg_depth.exr')):
@@ -186,6 +216,7 @@ def preprocess_samples(input_dir, dataset_names):
         del dataset_names[sample_name]
 
     # estimate missing background images (with removed foreground object)
+    print(len(foreground_removal_samples))
     if len(foreground_removal_samples) > 0:
         print(f"Estimating background images for {len(foreground_removal_samples)} samples ...")
         remove_foreground(
@@ -312,7 +343,13 @@ def parse_args():
 
 if __name__ == '__main__':
     args = parse_args()
-
+    print(f"Using device: {args.device}")
+    if args.device is not None:
+        print(f"Current CUDA device: {torch.cuda.current_device()}")
+    print(f'test_set_path: {args.test_set_path}')
+    print(f'input_dir: {args.input_dir}')
+    print(f'output_dir: {args.output_dir}')
+    
     test_diffusion_handles(
         test_set_path=args.test_set_path,
         input_dir=args.input_dir,

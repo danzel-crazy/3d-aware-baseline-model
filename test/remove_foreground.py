@@ -20,9 +20,12 @@ def remove_foreground(input_image_paths, foreground_mask_paths, output_paths, im
     for input_image_path, foreground_mask_path, output_path in zip(input_image_paths, foreground_mask_paths, output_paths):
 
         # load input image
+        print(f'Processing image: {input_image_path}')
         img = load_image(input_image_path).unsqueeze(dim=0)
         img = crop_and_resize(img=img, size=img_res)
         img = img.to(device)
+        print(img.size())
+        img = img[:, :3, :, :]
         
         # load the foreground mask
         fg_mask = load_image(foreground_mask_path).unsqueeze(dim=0)

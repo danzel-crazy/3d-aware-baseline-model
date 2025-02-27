@@ -1,0 +1,1123 @@
+<!-- BEGIN: results_template.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diffusion Handles Test Set Results</title>
+</head>
+<style>
+table { 
+    table-layout:fixed;
+    width:100%;
+}
+img {
+    max-height:100%;
+    max-width:100%;
+}
+thead th {
+    top: 0;
+    position: sticky;
+    z-index: 20;
+    background-color: white;
+}
+</style>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Input</th>
+                <th>Mask</th>
+                <th>Depth</th>
+                <th>Background</th>
+                <th>Bg. Depth</th>
+                <th>Inverted</th>
+                <th>Edit</th>
+                <th>Edit Disparity</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><img src="./car/input.png"></td>
+                <td><img src="./car/mask.png"></td>
+                <td><img src="./car/depth.png"></td>
+                <td><img src="./car/bg.png"></td>
+                <td><img src="./car/bg_depth.png"></td>
+                <td><img src="./car/recon.png"></td>
+                <td><img src="./car/edit_000.png"></td>
+                <td><img src="./car/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car/input.png"></td>
+                <td><img src="./car/mask.png"></td>
+                <td><img src="./car/depth.png"></td>
+                <td><img src="./car/bg.png"></td>
+                <td><img src="./car/bg_depth.png"></td>
+                <td><img src="./car/recon.png"></td>
+                <td><img src="./car/edit_001.png"></td>
+                <td><img src="./car/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car/input.png"></td>
+                <td><img src="./car/mask.png"></td>
+                <td><img src="./car/depth.png"></td>
+                <td><img src="./car/bg.png"></td>
+                <td><img src="./car/bg_depth.png"></td>
+                <td><img src="./car/recon.png"></td>
+                <td><img src="./car/edit_002.png"></td>
+                <td><img src="./car/edit_002_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car/input.png"></td>
+                <td><img src="./car/mask.png"></td>
+                <td><img src="./car/depth.png"></td>
+                <td><img src="./car/bg.png"></td>
+                <td><img src="./car/bg_depth.png"></td>
+                <td><img src="./car/recon.png"></td>
+                <td><img src="./car/edit_003.png"></td>
+                <td><img src="./car/edit_003_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car/input.png"></td>
+                <td><img src="./car/mask.png"></td>
+                <td><img src="./car/depth.png"></td>
+                <td><img src="./car/bg.png"></td>
+                <td><img src="./car/bg_depth.png"></td>
+                <td><img src="./car/recon.png"></td>
+                <td><img src="./car/edit_004.png"></td>
+                <td><img src="./car/edit_004_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car_2/input.png"></td>
+                <td><img src="./car_2/mask.png"></td>
+                <td><img src="./car_2/depth.png"></td>
+                <td><img src="./car_2/bg.png"></td>
+                <td><img src="./car_2/bg_depth.png"></td>
+                <td><img src="./car_2/recon.png"></td>
+                <td><img src="./car_2/edit_000.png"></td>
+                <td><img src="./car_2/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car_2/input.png"></td>
+                <td><img src="./car_2/mask.png"></td>
+                <td><img src="./car_2/depth.png"></td>
+                <td><img src="./car_2/bg.png"></td>
+                <td><img src="./car_2/bg_depth.png"></td>
+                <td><img src="./car_2/recon.png"></td>
+                <td><img src="./car_2/edit_001.png"></td>
+                <td><img src="./car_2/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car_2/input.png"></td>
+                <td><img src="./car_2/mask.png"></td>
+                <td><img src="./car_2/depth.png"></td>
+                <td><img src="./car_2/bg.png"></td>
+                <td><img src="./car_2/bg_depth.png"></td>
+                <td><img src="./car_2/recon.png"></td>
+                <td><img src="./car_2/edit_002.png"></td>
+                <td><img src="./car_2/edit_002_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car_2/input.png"></td>
+                <td><img src="./car_2/mask.png"></td>
+                <td><img src="./car_2/depth.png"></td>
+                <td><img src="./car_2/bg.png"></td>
+                <td><img src="./car_2/bg_depth.png"></td>
+                <td><img src="./car_2/recon.png"></td>
+                <td><img src="./car_2/edit_003.png"></td>
+                <td><img src="./car_2/edit_003_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car_2/input.png"></td>
+                <td><img src="./car_2/mask.png"></td>
+                <td><img src="./car_2/depth.png"></td>
+                <td><img src="./car_2/bg.png"></td>
+                <td><img src="./car_2/bg_depth.png"></td>
+                <td><img src="./car_2/recon.png"></td>
+                <td><img src="./car_2/edit_004.png"></td>
+                <td><img src="./car_2/edit_004_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car_2/input.png"></td>
+                <td><img src="./car_2/mask.png"></td>
+                <td><img src="./car_2/depth.png"></td>
+                <td><img src="./car_2/bg.png"></td>
+                <td><img src="./car_2/bg_depth.png"></td>
+                <td><img src="./car_2/recon.png"></td>
+                <td><img src="./car_2/edit_005.png"></td>
+                <td><img src="./car_2/edit_005_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car_2/input.png"></td>
+                <td><img src="./car_2/mask.png"></td>
+                <td><img src="./car_2/depth.png"></td>
+                <td><img src="./car_2/bg.png"></td>
+                <td><img src="./car_2/bg_depth.png"></td>
+                <td><img src="./car_2/recon.png"></td>
+                <td><img src="./car_2/edit_006.png"></td>
+                <td><img src="./car_2/edit_006_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car_2/input.png"></td>
+                <td><img src="./car_2/mask.png"></td>
+                <td><img src="./car_2/depth.png"></td>
+                <td><img src="./car_2/bg.png"></td>
+                <td><img src="./car_2/bg_depth.png"></td>
+                <td><img src="./car_2/recon.png"></td>
+                <td><img src="./car_2/edit_007.png"></td>
+                <td><img src="./car_2/edit_007_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car_2/input.png"></td>
+                <td><img src="./car_2/mask.png"></td>
+                <td><img src="./car_2/depth.png"></td>
+                <td><img src="./car_2/bg.png"></td>
+                <td><img src="./car_2/bg_depth.png"></td>
+                <td><img src="./car_2/recon.png"></td>
+                <td><img src="./car_2/edit_008.png"></td>
+                <td><img src="./car_2/edit_008_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car_2/input.png"></td>
+                <td><img src="./car_2/mask.png"></td>
+                <td><img src="./car_2/depth.png"></td>
+                <td><img src="./car_2/bg.png"></td>
+                <td><img src="./car_2/bg_depth.png"></td>
+                <td><img src="./car_2/recon.png"></td>
+                <td><img src="./car_2/edit_009.png"></td>
+                <td><img src="./car_2/edit_009_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car_2/input.png"></td>
+                <td><img src="./car_2/mask.png"></td>
+                <td><img src="./car_2/depth.png"></td>
+                <td><img src="./car_2/bg.png"></td>
+                <td><img src="./car_2/bg_depth.png"></td>
+                <td><img src="./car_2/recon.png"></td>
+                <td><img src="./car_2/edit_010.png"></td>
+                <td><img src="./car_2/edit_010_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car_2/input.png"></td>
+                <td><img src="./car_2/mask.png"></td>
+                <td><img src="./car_2/depth.png"></td>
+                <td><img src="./car_2/bg.png"></td>
+                <td><img src="./car_2/bg_depth.png"></td>
+                <td><img src="./car_2/recon.png"></td>
+                <td><img src="./car_2/edit_011.png"></td>
+                <td><img src="./car_2/edit_011_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car_2/input.png"></td>
+                <td><img src="./car_2/mask.png"></td>
+                <td><img src="./car_2/depth.png"></td>
+                <td><img src="./car_2/bg.png"></td>
+                <td><img src="./car_2/bg_depth.png"></td>
+                <td><img src="./car_2/recon.png"></td>
+                <td><img src="./car_2/edit_012.png"></td>
+                <td><img src="./car_2/edit_012_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car_2/input.png"></td>
+                <td><img src="./car_2/mask.png"></td>
+                <td><img src="./car_2/depth.png"></td>
+                <td><img src="./car_2/bg.png"></td>
+                <td><img src="./car_2/bg_depth.png"></td>
+                <td><img src="./car_2/recon.png"></td>
+                <td><img src="./car_2/edit_013.png"></td>
+                <td><img src="./car_2/edit_013_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car_2/input.png"></td>
+                <td><img src="./car_2/mask.png"></td>
+                <td><img src="./car_2/depth.png"></td>
+                <td><img src="./car_2/bg.png"></td>
+                <td><img src="./car_2/bg_depth.png"></td>
+                <td><img src="./car_2/recon.png"></td>
+                <td><img src="./car_2/edit_014.png"></td>
+                <td><img src="./car_2/edit_014_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car_2/input.png"></td>
+                <td><img src="./car_2/mask.png"></td>
+                <td><img src="./car_2/depth.png"></td>
+                <td><img src="./car_2/bg.png"></td>
+                <td><img src="./car_2/bg_depth.png"></td>
+                <td><img src="./car_2/recon.png"></td>
+                <td><img src="./car_2/edit_015.png"></td>
+                <td><img src="./car_2/edit_015_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car_2/input.png"></td>
+                <td><img src="./car_2/mask.png"></td>
+                <td><img src="./car_2/depth.png"></td>
+                <td><img src="./car_2/bg.png"></td>
+                <td><img src="./car_2/bg_depth.png"></td>
+                <td><img src="./car_2/recon.png"></td>
+                <td><img src="./car_2/edit_016.png"></td>
+                <td><img src="./car_2/edit_016_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car_2/input.png"></td>
+                <td><img src="./car_2/mask.png"></td>
+                <td><img src="./car_2/depth.png"></td>
+                <td><img src="./car_2/bg.png"></td>
+                <td><img src="./car_2/bg_depth.png"></td>
+                <td><img src="./car_2/recon.png"></td>
+                <td><img src="./car_2/edit_017.png"></td>
+                <td><img src="./car_2/edit_017_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car_2/input.png"></td>
+                <td><img src="./car_2/mask.png"></td>
+                <td><img src="./car_2/depth.png"></td>
+                <td><img src="./car_2/bg.png"></td>
+                <td><img src="./car_2/bg_depth.png"></td>
+                <td><img src="./car_2/recon.png"></td>
+                <td><img src="./car_2/edit_018.png"></td>
+                <td><img src="./car_2/edit_018_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car_2/input.png"></td>
+                <td><img src="./car_2/mask.png"></td>
+                <td><img src="./car_2/depth.png"></td>
+                <td><img src="./car_2/bg.png"></td>
+                <td><img src="./car_2/bg_depth.png"></td>
+                <td><img src="./car_2/recon.png"></td>
+                <td><img src="./car_2/edit_019.png"></td>
+                <td><img src="./car_2/edit_019_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car_3/input.png"></td>
+                <td><img src="./car_3/mask.png"></td>
+                <td><img src="./car_3/depth.png"></td>
+                <td><img src="./car_3/bg.png"></td>
+                <td><img src="./car_3/bg_depth.png"></td>
+                <td><img src="./car_3/recon.png"></td>
+                <td><img src="./car_3/edit_000.png"></td>
+                <td><img src="./car_3/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./car_3/input.png"></td>
+                <td><img src="./car_3/mask.png"></td>
+                <td><img src="./car_3/depth.png"></td>
+                <td><img src="./car_3/bg.png"></td>
+                <td><img src="./car_3/bg_depth.png"></td>
+                <td><img src="./car_3/recon.png"></td>
+                <td><img src="./car_3/edit_001.png"></td>
+                <td><img src="./car_3/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./chair/input.png"></td>
+                <td><img src="./chair/mask.png"></td>
+                <td><img src="./chair/depth.png"></td>
+                <td><img src="./chair/bg.png"></td>
+                <td><img src="./chair/bg_depth.png"></td>
+                <td><img src="./chair/recon.png"></td>
+                <td><img src="./chair/edit_000.png"></td>
+                <td><img src="./chair/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./chair/input.png"></td>
+                <td><img src="./chair/mask.png"></td>
+                <td><img src="./chair/depth.png"></td>
+                <td><img src="./chair/bg.png"></td>
+                <td><img src="./chair/bg_depth.png"></td>
+                <td><img src="./chair/recon.png"></td>
+                <td><img src="./chair/edit_001.png"></td>
+                <td><img src="./chair/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./chair/input.png"></td>
+                <td><img src="./chair/mask.png"></td>
+                <td><img src="./chair/depth.png"></td>
+                <td><img src="./chair/bg.png"></td>
+                <td><img src="./chair/bg_depth.png"></td>
+                <td><img src="./chair/recon.png"></td>
+                <td><img src="./chair/edit_002.png"></td>
+                <td><img src="./chair/edit_002_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./chair_2/input.png"></td>
+                <td><img src="./chair_2/mask.png"></td>
+                <td><img src="./chair_2/depth.png"></td>
+                <td><img src="./chair_2/bg.png"></td>
+                <td><img src="./chair_2/bg_depth.png"></td>
+                <td><img src="./chair_2/recon.png"></td>
+                <td><img src="./chair_2/edit_000.png"></td>
+                <td><img src="./chair_2/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./chair_2/input.png"></td>
+                <td><img src="./chair_2/mask.png"></td>
+                <td><img src="./chair_2/depth.png"></td>
+                <td><img src="./chair_2/bg.png"></td>
+                <td><img src="./chair_2/bg_depth.png"></td>
+                <td><img src="./chair_2/recon.png"></td>
+                <td><img src="./chair_2/edit_001.png"></td>
+                <td><img src="./chair_2/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./chair_2/input.png"></td>
+                <td><img src="./chair_2/mask.png"></td>
+                <td><img src="./chair_2/depth.png"></td>
+                <td><img src="./chair_2/bg.png"></td>
+                <td><img src="./chair_2/bg_depth.png"></td>
+                <td><img src="./chair_2/recon.png"></td>
+                <td><img src="./chair_2/edit_002.png"></td>
+                <td><img src="./chair_2/edit_002_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./chair_2/input.png"></td>
+                <td><img src="./chair_2/mask.png"></td>
+                <td><img src="./chair_2/depth.png"></td>
+                <td><img src="./chair_2/bg.png"></td>
+                <td><img src="./chair_2/bg_depth.png"></td>
+                <td><img src="./chair_2/recon.png"></td>
+                <td><img src="./chair_2/edit_003.png"></td>
+                <td><img src="./chair_2/edit_003_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./chrome_headlight/input.png"></td>
+                <td><img src="./chrome_headlight/mask.png"></td>
+                <td><img src="./chrome_headlight/depth.png"></td>
+                <td><img src="./chrome_headlight/bg.png"></td>
+                <td><img src="./chrome_headlight/bg_depth.png"></td>
+                <td><img src="./chrome_headlight/recon.png"></td>
+                <td><img src="./chrome_headlight/edit_000.png"></td>
+                <td><img src="./chrome_headlight/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./chrome_headlight/input.png"></td>
+                <td><img src="./chrome_headlight/mask.png"></td>
+                <td><img src="./chrome_headlight/depth.png"></td>
+                <td><img src="./chrome_headlight/bg.png"></td>
+                <td><img src="./chrome_headlight/bg_depth.png"></td>
+                <td><img src="./chrome_headlight/recon.png"></td>
+                <td><img src="./chrome_headlight/edit_001.png"></td>
+                <td><img src="./chrome_headlight/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./cube_toy/input.png"></td>
+                <td><img src="./cube_toy/mask.png"></td>
+                <td><img src="./cube_toy/depth.png"></td>
+                <td><img src="./cube_toy/bg.png"></td>
+                <td><img src="./cube_toy/bg_depth.png"></td>
+                <td><img src="./cube_toy/recon.png"></td>
+                <td><img src="./cube_toy/edit_000.png"></td>
+                <td><img src="./cube_toy/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./cube_toy/input.png"></td>
+                <td><img src="./cube_toy/mask.png"></td>
+                <td><img src="./cube_toy/depth.png"></td>
+                <td><img src="./cube_toy/bg.png"></td>
+                <td><img src="./cube_toy/bg_depth.png"></td>
+                <td><img src="./cube_toy/recon.png"></td>
+                <td><img src="./cube_toy/edit_001.png"></td>
+                <td><img src="./cube_toy/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./cube_toy/input.png"></td>
+                <td><img src="./cube_toy/mask.png"></td>
+                <td><img src="./cube_toy/depth.png"></td>
+                <td><img src="./cube_toy/bg.png"></td>
+                <td><img src="./cube_toy/bg_depth.png"></td>
+                <td><img src="./cube_toy/recon.png"></td>
+                <td><img src="./cube_toy/edit_002.png"></td>
+                <td><img src="./cube_toy/edit_002_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./dice/input.png"></td>
+                <td><img src="./dice/mask.png"></td>
+                <td><img src="./dice/depth.png"></td>
+                <td><img src="./dice/bg.png"></td>
+                <td><img src="./dice/bg_depth.png"></td>
+                <td><img src="./dice/recon.png"></td>
+                <td><img src="./dice/edit_000.png"></td>
+                <td><img src="./dice/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./dice/input.png"></td>
+                <td><img src="./dice/mask.png"></td>
+                <td><img src="./dice/depth.png"></td>
+                <td><img src="./dice/bg.png"></td>
+                <td><img src="./dice/bg_depth.png"></td>
+                <td><img src="./dice/recon.png"></td>
+                <td><img src="./dice/edit_001.png"></td>
+                <td><img src="./dice/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./fighter_jet/input.png"></td>
+                <td><img src="./fighter_jet/mask.png"></td>
+                <td><img src="./fighter_jet/depth.png"></td>
+                <td><img src="./fighter_jet/bg.png"></td>
+                <td><img src="./fighter_jet/bg_depth.png"></td>
+                <td><img src="./fighter_jet/recon.png"></td>
+                <td><img src="./fighter_jet/edit_000.png"></td>
+                <td><img src="./fighter_jet/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./fighter_jet/input.png"></td>
+                <td><img src="./fighter_jet/mask.png"></td>
+                <td><img src="./fighter_jet/depth.png"></td>
+                <td><img src="./fighter_jet/bg.png"></td>
+                <td><img src="./fighter_jet/bg_depth.png"></td>
+                <td><img src="./fighter_jet/recon.png"></td>
+                <td><img src="./fighter_jet/edit_001.png"></td>
+                <td><img src="./fighter_jet/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./fighter_jet/input.png"></td>
+                <td><img src="./fighter_jet/mask.png"></td>
+                <td><img src="./fighter_jet/depth.png"></td>
+                <td><img src="./fighter_jet/bg.png"></td>
+                <td><img src="./fighter_jet/bg_depth.png"></td>
+                <td><img src="./fighter_jet/recon.png"></td>
+                <td><img src="./fighter_jet/edit_002.png"></td>
+                <td><img src="./fighter_jet/edit_002_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./potted_plant/input.png"></td>
+                <td><img src="./potted_plant/mask.png"></td>
+                <td><img src="./potted_plant/depth.png"></td>
+                <td><img src="./potted_plant/bg.png"></td>
+                <td><img src="./potted_plant/bg_depth.png"></td>
+                <td><img src="./potted_plant/recon.png"></td>
+                <td><img src="./potted_plant/edit_000.png"></td>
+                <td><img src="./potted_plant/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./potted_plant/input.png"></td>
+                <td><img src="./potted_plant/mask.png"></td>
+                <td><img src="./potted_plant/depth.png"></td>
+                <td><img src="./potted_plant/bg.png"></td>
+                <td><img src="./potted_plant/bg_depth.png"></td>
+                <td><img src="./potted_plant/recon.png"></td>
+                <td><img src="./potted_plant/edit_001.png"></td>
+                <td><img src="./potted_plant/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./potted_plant/input.png"></td>
+                <td><img src="./potted_plant/mask.png"></td>
+                <td><img src="./potted_plant/depth.png"></td>
+                <td><img src="./potted_plant/bg.png"></td>
+                <td><img src="./potted_plant/bg_depth.png"></td>
+                <td><img src="./potted_plant/recon.png"></td>
+                <td><img src="./potted_plant/edit_002.png"></td>
+                <td><img src="./potted_plant/edit_002_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./potted_plant/input.png"></td>
+                <td><img src="./potted_plant/mask.png"></td>
+                <td><img src="./potted_plant/depth.png"></td>
+                <td><img src="./potted_plant/bg.png"></td>
+                <td><img src="./potted_plant/bg_depth.png"></td>
+                <td><img src="./potted_plant/recon.png"></td>
+                <td><img src="./potted_plant/edit_003.png"></td>
+                <td><img src="./potted_plant/edit_003_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./potted_plant/input.png"></td>
+                <td><img src="./potted_plant/mask.png"></td>
+                <td><img src="./potted_plant/depth.png"></td>
+                <td><img src="./potted_plant/bg.png"></td>
+                <td><img src="./potted_plant/bg_depth.png"></td>
+                <td><img src="./potted_plant/recon.png"></td>
+                <td><img src="./potted_plant/edit_004.png"></td>
+                <td><img src="./potted_plant/edit_004_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./milk_carton/input.png"></td>
+                <td><img src="./milk_carton/mask.png"></td>
+                <td><img src="./milk_carton/depth.png"></td>
+                <td><img src="./milk_carton/bg.png"></td>
+                <td><img src="./milk_carton/bg_depth.png"></td>
+                <td><img src="./milk_carton/recon.png"></td>
+                <td><img src="./milk_carton/edit_000.png"></td>
+                <td><img src="./milk_carton/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./milk_carton/input.png"></td>
+                <td><img src="./milk_carton/mask.png"></td>
+                <td><img src="./milk_carton/depth.png"></td>
+                <td><img src="./milk_carton/bg.png"></td>
+                <td><img src="./milk_carton/bg_depth.png"></td>
+                <td><img src="./milk_carton/recon.png"></td>
+                <td><img src="./milk_carton/edit_001.png"></td>
+                <td><img src="./milk_carton/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./milk_carton/input.png"></td>
+                <td><img src="./milk_carton/mask.png"></td>
+                <td><img src="./milk_carton/depth.png"></td>
+                <td><img src="./milk_carton/bg.png"></td>
+                <td><img src="./milk_carton/bg_depth.png"></td>
+                <td><img src="./milk_carton/recon.png"></td>
+                <td><img src="./milk_carton/edit_002.png"></td>
+                <td><img src="./milk_carton/edit_002_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./plane/input.png"></td>
+                <td><img src="./plane/mask.png"></td>
+                <td><img src="./plane/depth.png"></td>
+                <td><img src="./plane/bg.png"></td>
+                <td><img src="./plane/bg_depth.png"></td>
+                <td><img src="./plane/recon.png"></td>
+                <td><img src="./plane/edit_000.png"></td>
+                <td><img src="./plane/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./plane/input.png"></td>
+                <td><img src="./plane/mask.png"></td>
+                <td><img src="./plane/depth.png"></td>
+                <td><img src="./plane/bg.png"></td>
+                <td><img src="./plane/bg_depth.png"></td>
+                <td><img src="./plane/recon.png"></td>
+                <td><img src="./plane/edit_001.png"></td>
+                <td><img src="./plane/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./plane/input.png"></td>
+                <td><img src="./plane/mask.png"></td>
+                <td><img src="./plane/depth.png"></td>
+                <td><img src="./plane/bg.png"></td>
+                <td><img src="./plane/bg_depth.png"></td>
+                <td><img src="./plane/recon.png"></td>
+                <td><img src="./plane/edit_002.png"></td>
+                <td><img src="./plane/edit_002_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./red_block/input.png"></td>
+                <td><img src="./red_block/mask.png"></td>
+                <td><img src="./red_block/depth.png"></td>
+                <td><img src="./red_block/bg.png"></td>
+                <td><img src="./red_block/bg_depth.png"></td>
+                <td><img src="./red_block/recon.png"></td>
+                <td><img src="./red_block/edit_000.png"></td>
+                <td><img src="./red_block/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./red_block/input.png"></td>
+                <td><img src="./red_block/mask.png"></td>
+                <td><img src="./red_block/depth.png"></td>
+                <td><img src="./red_block/bg.png"></td>
+                <td><img src="./red_block/bg_depth.png"></td>
+                <td><img src="./red_block/recon.png"></td>
+                <td><img src="./red_block/edit_001.png"></td>
+                <td><img src="./red_block/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./red_block/input.png"></td>
+                <td><img src="./red_block/mask.png"></td>
+                <td><img src="./red_block/depth.png"></td>
+                <td><img src="./red_block/bg.png"></td>
+                <td><img src="./red_block/bg_depth.png"></td>
+                <td><img src="./red_block/recon.png"></td>
+                <td><img src="./red_block/edit_002.png"></td>
+                <td><img src="./red_block/edit_002_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./shoe/input.png"></td>
+                <td><img src="./shoe/mask.png"></td>
+                <td><img src="./shoe/depth.png"></td>
+                <td><img src="./shoe/bg.png"></td>
+                <td><img src="./shoe/bg_depth.png"></td>
+                <td><img src="./shoe/recon.png"></td>
+                <td><img src="./shoe/edit_000.png"></td>
+                <td><img src="./shoe/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./shoe/input.png"></td>
+                <td><img src="./shoe/mask.png"></td>
+                <td><img src="./shoe/depth.png"></td>
+                <td><img src="./shoe/bg.png"></td>
+                <td><img src="./shoe/bg_depth.png"></td>
+                <td><img src="./shoe/recon.png"></td>
+                <td><img src="./shoe/edit_001.png"></td>
+                <td><img src="./shoe/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./shoe/input.png"></td>
+                <td><img src="./shoe/mask.png"></td>
+                <td><img src="./shoe/depth.png"></td>
+                <td><img src="./shoe/bg.png"></td>
+                <td><img src="./shoe/bg_depth.png"></td>
+                <td><img src="./shoe/recon.png"></td>
+                <td><img src="./shoe/edit_002.png"></td>
+                <td><img src="./shoe/edit_002_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./shoe/input.png"></td>
+                <td><img src="./shoe/mask.png"></td>
+                <td><img src="./shoe/depth.png"></td>
+                <td><img src="./shoe/bg.png"></td>
+                <td><img src="./shoe/bg_depth.png"></td>
+                <td><img src="./shoe/recon.png"></td>
+                <td><img src="./shoe/edit_003.png"></td>
+                <td><img src="./shoe/edit_003_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./shoe/input.png"></td>
+                <td><img src="./shoe/mask.png"></td>
+                <td><img src="./shoe/depth.png"></td>
+                <td><img src="./shoe/bg.png"></td>
+                <td><img src="./shoe/bg_depth.png"></td>
+                <td><img src="./shoe/recon.png"></td>
+                <td><img src="./shoe/edit_004.png"></td>
+                <td><img src="./shoe/edit_004_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./shoe/input.png"></td>
+                <td><img src="./shoe/mask.png"></td>
+                <td><img src="./shoe/depth.png"></td>
+                <td><img src="./shoe/bg.png"></td>
+                <td><img src="./shoe/bg_depth.png"></td>
+                <td><img src="./shoe/recon.png"></td>
+                <td><img src="./shoe/edit_005.png"></td>
+                <td><img src="./shoe/edit_005_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./sunflower/input.png"></td>
+                <td><img src="./sunflower/mask.png"></td>
+                <td><img src="./sunflower/depth.png"></td>
+                <td><img src="./sunflower/bg.png"></td>
+                <td><img src="./sunflower/bg_depth.png"></td>
+                <td><img src="./sunflower/recon.png"></td>
+                <td><img src="./sunflower/edit_000.png"></td>
+                <td><img src="./sunflower/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./sunflower/input.png"></td>
+                <td><img src="./sunflower/mask.png"></td>
+                <td><img src="./sunflower/depth.png"></td>
+                <td><img src="./sunflower/bg.png"></td>
+                <td><img src="./sunflower/bg_depth.png"></td>
+                <td><img src="./sunflower/recon.png"></td>
+                <td><img src="./sunflower/edit_001.png"></td>
+                <td><img src="./sunflower/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./sunflower/input.png"></td>
+                <td><img src="./sunflower/mask.png"></td>
+                <td><img src="./sunflower/depth.png"></td>
+                <td><img src="./sunflower/bg.png"></td>
+                <td><img src="./sunflower/bg_depth.png"></td>
+                <td><img src="./sunflower/recon.png"></td>
+                <td><img src="./sunflower/edit_002.png"></td>
+                <td><img src="./sunflower/edit_002_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./sunflower/input.png"></td>
+                <td><img src="./sunflower/mask.png"></td>
+                <td><img src="./sunflower/depth.png"></td>
+                <td><img src="./sunflower/bg.png"></td>
+                <td><img src="./sunflower/bg_depth.png"></td>
+                <td><img src="./sunflower/recon.png"></td>
+                <td><img src="./sunflower/edit_003.png"></td>
+                <td><img src="./sunflower/edit_003_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./sunflower/input.png"></td>
+                <td><img src="./sunflower/mask.png"></td>
+                <td><img src="./sunflower/depth.png"></td>
+                <td><img src="./sunflower/bg.png"></td>
+                <td><img src="./sunflower/bg_depth.png"></td>
+                <td><img src="./sunflower/recon.png"></td>
+                <td><img src="./sunflower/edit_004.png"></td>
+                <td><img src="./sunflower/edit_004_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./sunflower/input.png"></td>
+                <td><img src="./sunflower/mask.png"></td>
+                <td><img src="./sunflower/depth.png"></td>
+                <td><img src="./sunflower/bg.png"></td>
+                <td><img src="./sunflower/bg_depth.png"></td>
+                <td><img src="./sunflower/recon.png"></td>
+                <td><img src="./sunflower/edit_005.png"></td>
+                <td><img src="./sunflower/edit_005_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./sunflower/input.png"></td>
+                <td><img src="./sunflower/mask.png"></td>
+                <td><img src="./sunflower/depth.png"></td>
+                <td><img src="./sunflower/bg.png"></td>
+                <td><img src="./sunflower/bg_depth.png"></td>
+                <td><img src="./sunflower/recon.png"></td>
+                <td><img src="./sunflower/edit_006.png"></td>
+                <td><img src="./sunflower/edit_006_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./sunflower/input.png"></td>
+                <td><img src="./sunflower/mask.png"></td>
+                <td><img src="./sunflower/depth.png"></td>
+                <td><img src="./sunflower/bg.png"></td>
+                <td><img src="./sunflower/bg_depth.png"></td>
+                <td><img src="./sunflower/recon.png"></td>
+                <td><img src="./sunflower/edit_007.png"></td>
+                <td><img src="./sunflower/edit_007_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./sunflower/input.png"></td>
+                <td><img src="./sunflower/mask.png"></td>
+                <td><img src="./sunflower/depth.png"></td>
+                <td><img src="./sunflower/bg.png"></td>
+                <td><img src="./sunflower/bg_depth.png"></td>
+                <td><img src="./sunflower/recon.png"></td>
+                <td><img src="./sunflower/edit_008.png"></td>
+                <td><img src="./sunflower/edit_008_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./sunflower/input.png"></td>
+                <td><img src="./sunflower/mask.png"></td>
+                <td><img src="./sunflower/depth.png"></td>
+                <td><img src="./sunflower/bg.png"></td>
+                <td><img src="./sunflower/bg_depth.png"></td>
+                <td><img src="./sunflower/recon.png"></td>
+                <td><img src="./sunflower/edit_009.png"></td>
+                <td><img src="./sunflower/edit_009_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./sunflower/input.png"></td>
+                <td><img src="./sunflower/mask.png"></td>
+                <td><img src="./sunflower/depth.png"></td>
+                <td><img src="./sunflower/bg.png"></td>
+                <td><img src="./sunflower/bg_depth.png"></td>
+                <td><img src="./sunflower/recon.png"></td>
+                <td><img src="./sunflower/edit_010.png"></td>
+                <td><img src="./sunflower/edit_010_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./sunflower/input.png"></td>
+                <td><img src="./sunflower/mask.png"></td>
+                <td><img src="./sunflower/depth.png"></td>
+                <td><img src="./sunflower/bg.png"></td>
+                <td><img src="./sunflower/bg_depth.png"></td>
+                <td><img src="./sunflower/recon.png"></td>
+                <td><img src="./sunflower/edit_011.png"></td>
+                <td><img src="./sunflower/edit_011_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./sunflower/input.png"></td>
+                <td><img src="./sunflower/mask.png"></td>
+                <td><img src="./sunflower/depth.png"></td>
+                <td><img src="./sunflower/bg.png"></td>
+                <td><img src="./sunflower/bg_depth.png"></td>
+                <td><img src="./sunflower/recon.png"></td>
+                <td><img src="./sunflower/edit_012.png"></td>
+                <td><img src="./sunflower/edit_012_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./sunflower/input.png"></td>
+                <td><img src="./sunflower/mask.png"></td>
+                <td><img src="./sunflower/depth.png"></td>
+                <td><img src="./sunflower/bg.png"></td>
+                <td><img src="./sunflower/bg_depth.png"></td>
+                <td><img src="./sunflower/recon.png"></td>
+                <td><img src="./sunflower/edit_013.png"></td>
+                <td><img src="./sunflower/edit_013_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./potted_plant_2/input.png"></td>
+                <td><img src="./potted_plant_2/mask.png"></td>
+                <td><img src="./potted_plant_2/depth.png"></td>
+                <td><img src="./potted_plant_2/bg.png"></td>
+                <td><img src="./potted_plant_2/bg_depth.png"></td>
+                <td><img src="./potted_plant_2/recon.png"></td>
+                <td><img src="./potted_plant_2/edit_000.png"></td>
+                <td><img src="./potted_plant_2/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./potted_plant_2/input.png"></td>
+                <td><img src="./potted_plant_2/mask.png"></td>
+                <td><img src="./potted_plant_2/depth.png"></td>
+                <td><img src="./potted_plant_2/bg.png"></td>
+                <td><img src="./potted_plant_2/bg_depth.png"></td>
+                <td><img src="./potted_plant_2/recon.png"></td>
+                <td><img src="./potted_plant_2/edit_001.png"></td>
+                <td><img src="./potted_plant_2/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./wine_glass/input.png"></td>
+                <td><img src="./wine_glass/mask.png"></td>
+                <td><img src="./wine_glass/depth.png"></td>
+                <td><img src="./wine_glass/bg.png"></td>
+                <td><img src="./wine_glass/bg_depth.png"></td>
+                <td><img src="./wine_glass/recon.png"></td>
+                <td><img src="./wine_glass/edit_000.png"></td>
+                <td><img src="./wine_glass/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./wine_glass/input.png"></td>
+                <td><img src="./wine_glass/mask.png"></td>
+                <td><img src="./wine_glass/depth.png"></td>
+                <td><img src="./wine_glass/bg.png"></td>
+                <td><img src="./wine_glass/bg_depth.png"></td>
+                <td><img src="./wine_glass/recon.png"></td>
+                <td><img src="./wine_glass/edit_001.png"></td>
+                <td><img src="./wine_glass/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./wine_glass/input.png"></td>
+                <td><img src="./wine_glass/mask.png"></td>
+                <td><img src="./wine_glass/depth.png"></td>
+                <td><img src="./wine_glass/bg.png"></td>
+                <td><img src="./wine_glass/bg_depth.png"></td>
+                <td><img src="./wine_glass/recon.png"></td>
+                <td><img src="./wine_glass/edit_002.png"></td>
+                <td><img src="./wine_glass/edit_002_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./toaster/input.png"></td>
+                <td><img src="./toaster/mask.png"></td>
+                <td><img src="./toaster/depth.png"></td>
+                <td><img src="./toaster/bg.png"></td>
+                <td><img src="./toaster/bg_depth.png"></td>
+                <td><img src="./toaster/recon.png"></td>
+                <td><img src="./toaster/edit_000.png"></td>
+                <td><img src="./toaster/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./toaster/input.png"></td>
+                <td><img src="./toaster/mask.png"></td>
+                <td><img src="./toaster/depth.png"></td>
+                <td><img src="./toaster/bg.png"></td>
+                <td><img src="./toaster/bg_depth.png"></td>
+                <td><img src="./toaster/recon.png"></td>
+                <td><img src="./toaster/edit_001.png"></td>
+                <td><img src="./toaster/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./guitar/input.png"></td>
+                <td><img src="./guitar/mask.png"></td>
+                <td><img src="./guitar/depth.png"></td>
+                <td><img src="./guitar/bg.png"></td>
+                <td><img src="./guitar/bg_depth.png"></td>
+                <td><img src="./guitar/recon.png"></td>
+                <td><img src="./guitar/edit_000.png"></td>
+                <td><img src="./guitar/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./guitar/input.png"></td>
+                <td><img src="./guitar/mask.png"></td>
+                <td><img src="./guitar/depth.png"></td>
+                <td><img src="./guitar/bg.png"></td>
+                <td><img src="./guitar/bg_depth.png"></td>
+                <td><img src="./guitar/recon.png"></td>
+                <td><img src="./guitar/edit_001.png"></td>
+                <td><img src="./guitar/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./banana_fruits/input.png"></td>
+                <td><img src="./banana_fruits/mask.png"></td>
+                <td><img src="./banana_fruits/depth.png"></td>
+                <td><img src="./banana_fruits/bg.png"></td>
+                <td><img src="./banana_fruits/bg_depth.png"></td>
+                <td><img src="./banana_fruits/recon.png"></td>
+                <td><img src="./banana_fruits/edit_000.png"></td>
+                <td><img src="./banana_fruits/edit_000_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./banana_fruits/input.png"></td>
+                <td><img src="./banana_fruits/mask.png"></td>
+                <td><img src="./banana_fruits/depth.png"></td>
+                <td><img src="./banana_fruits/bg.png"></td>
+                <td><img src="./banana_fruits/bg_depth.png"></td>
+                <td><img src="./banana_fruits/recon.png"></td>
+                <td><img src="./banana_fruits/edit_001.png"></td>
+                <td><img src="./banana_fruits/edit_001_disparity.png"></td>
+                
+            </tr>
+            
+            <tr>
+                <td><img src="./banana_fruits/input.png"></td>
+                <td><img src="./banana_fruits/mask.png"></td>
+                <td><img src="./banana_fruits/depth.png"></td>
+                <td><img src="./banana_fruits/bg.png"></td>
+                <td><img src="./banana_fruits/bg_depth.png"></td>
+                <td><img src="./banana_fruits/recon.png"></td>
+                <td><img src="./banana_fruits/edit_002.png"></td>
+                <td><img src="./banana_fruits/edit_002_disparity.png"></td>
+                
+            </tr>
+            
+        </tbody>
+    </table>
+</body>
+</html>
+<!-- END: results_template.html -->

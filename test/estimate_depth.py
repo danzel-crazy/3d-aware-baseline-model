@@ -25,6 +25,8 @@ def estimate_depth(input_image_paths, output_paths, img_res=512):
         if img_res is not None:
             img = crop_and_resize(img=img, size=img_res)
         img = img.to(device)
+        print(img.size())
+        img = img[:, :3, :, :]
         
         with torch.no_grad():
             depth = depth_estimator.infer(img)
