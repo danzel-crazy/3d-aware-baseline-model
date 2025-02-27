@@ -13,5 +13,5 @@ pip install wandb
 pip install webdataset==0.2.5
 pip install ipdb
 pip install matplotlib
-sudo apt-get update && sudo apt-get install ffmpeg libsm6 libxext6  -y
+# sudo apt-get update && sudo apt-get install ffmpeg libsm6 libxext6  -y
 pip install torchmetrics[image]

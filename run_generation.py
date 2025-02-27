@@ -232,6 +232,8 @@ if __name__ == "__main__":
         default=1.0
     )
     args = parser.parse_args()
-    run(args)
+    if args.object_prompt == "banana":
+        print(args.object_prompt)
+        run(args)
 
     

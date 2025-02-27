@@ -1,0 +1,6 @@
+/DATASET
+/checkpoints
+/demo_images
+
+**/__pycache__/
+/test_outputs
