@@ -10,8 +10,34 @@ from einops import rearrange
 import math
 import numpy as np
 from PIL import Image
+import json
 
 base_path = "/net/nfs/prior/oscarm/best_checkpoints_2.0"
+
+class Args:
+    def __init__(self):
+        self.task = "rotate"
+        self.checkpoint_path = "/tmp2/danzel/3d-aware-baseline-model/checkpoints/rotate.ckpt"
+        self.image_path = ""
+        self.save_dir = "generated_images"
+        self.object_prompt = ""
+        self.rotation_angle = 0.0
+        self.position = "0.5,0.5"
+        self.ddim_steps = 50
+        self.num_samples = 4
+        self.device = 0
+        self.cfg_scale = 1.0
+        
+        print("LOADING MODEL!")
+        config = OmegaConf.load(f"configs/sd-objaverse-{self.task}.yaml")
+        OmegaConf.update(config,"model.params.cond_stage_config.params.device",self.device)
+        self.model = instantiate_from_config(config.model)
+        self.model.cpu()
+        load_checkpoint(self.model,self.checkpoint_path)
+        # model.to(args.device)
+        # model.eval()
+        print("FINISHED LOADING!")
+            
 
 def load_checkpoint(model,checkpoint):
 
@@ -113,16 +139,20 @@ def sample_model(
 
 def run(args):
 
-    print("LOADING MODEL!")
-    config = OmegaConf.load(f"configs/sd-objaverse-{args.task}.yaml")
-    OmegaConf.update(config,"model.params.cond_stage_config.params.device",args.device)
-    model = instantiate_from_config(config.model)
-    model.cpu()
-    load_checkpoint(model,args.checkpoint_path)
+    # print("LOADING MODEL!")
+    # config = OmegaConf.load(f"configs/sd-objaverse-{args.task}.yaml")
+    # OmegaConf.update(config,"model.params.cond_stage_config.params.device",args.device)
+    # model = instantiate_from_config(config.model)
+    # model.cpu()
+    # load_checkpoint(model,args.checkpoint_path)
+    # model.to(args.device)
+    # model.eval()
+    # print("FINISHED LOADING!")
+
+    model = args.model
     model.to(args.device)
     model.eval()
-    print("FINISHED LOADING!")
-
+    
     image = Image.open(args.image_path)
     input_im = preprocess_image(image).to(args.device)
     x, y = map(float, args.position.split(','))
@@ -168,7 +198,71 @@ def run(args):
     for i,img in enumerate(output_ims):
         img.save(os.path.join(args.save_dir,f"{i}.png"))
 
+def gen_run(input_dir, output_dir):
+    # parser = argparse.ArgumentParser()
+    # parser.add_argument("--task", type=str, choices=["rotate", "remove", "insert", "translate"] , default="rotate")
+    # parser.add_argument("--checkpoint_path", type=str, default="/tmp2/danzel/3d-aware-baseline-model/checkpoints/rotate.ckpt")
+    # parser.add_argument("--image_path", type=str, default="")
+    # parser.add_argument("--save_dir", type=str, default="generated_images")
+    # parser.add_argument("--object_prompt", type=str, default="")
+    # parser.add_argument("--rotation_angle", type=float, default=0.0)
+    # parser.add_argument("--position", type=str, default="0.5,0.5", help="Coordinates in x,y form where 0 <= x,y <= 1")
+    # parser.add_argument("--ddim_steps", type=int, default=50)
+    # parser.add_argument("--num_samples", type=int, default=4)
+    # parser.add_argument("--device", type=int, default=1)
+    # parser.add_argument("--cfg_scale", type=float, default=1.0)
     
+    args = Args()
+    
+    subdirs = [ "left", "back", "right","front"]
+    subdirs = ["back", "right","front"]
+    # subdirs = [ "left"]
+    rotation_angles = [90, 180, 270, 360]
+    angle_pair = {"left": 90, "back": 180, "right": 270,"front": 360}
+
+    for subdir in subdirs:
+        input_subdir = os.path.join(input_dir, subdir)
+        if not os.path.exists(input_subdir):
+            continue  # Skip if the input subdirectory doesn't exist
+
+        if subdir in angle_pair:
+            args.rotation_angle = angle_pair[subdir]
+        
+        #output/angle
+        output_subdir = os.path.join(output_dir, subdir)
+        if not os.path.exists(output_subdir):
+            os.makedirs(output_subdir, exist_ok=True)
+        
+        for folder in os.listdir(input_subdir):
+            foldername = os.path.join(input_subdir, folder)
+            filename = os.path.join(foldername, "1.png")
+            if os.path.exists(filename):
+                args.image_path = os.path.join(foldername, filename)
+                
+                #output/angle/folder
+                output_dir = os.path.join(output_subdir, folder)
+                if not os.path.exists(output_dir):
+                    os.makedirs(output_dir, exist_ok=True)
+                args.save_dir = output_dir
+                print(f'output path of generate images: ',args.save_dir)
+                
+            metadata_file = os.path.join(foldername, "metadata.json")
+            if os.path.exists(metadata_file):
+                with open(metadata_file, "r") as f:
+                    metadata = json.load(f)
+                    if "rotation_category" in metadata:
+                        if "_" in metadata["rotation_category"]:
+                            prompt = " ".join(metadata["rotation_category"].split("_"))
+                            args.object_prompt = prompt
+                        else:
+                            prompt = metadata["rotation_category"]
+                        args.object_prompt = prompt
+                print(f"Processing {folder} in {subdir} with rotation angle {args.rotation_angle}" and f"object prompt {args.object_prompt}")
+            
+            run(args)
+            # break
+        
+        # break
 
 
 if __name__ == "__main__":
@@ -236,4 +330,6 @@ if __name__ == "__main__":
         print(args.object_prompt)
         run(args)
 
+
+    
     
