@@ -6,3 +6,6 @@
 /ldm/**/__pycache__/
 /test_outputs
 /object_rotate
+/object3dit_translate
+
+*.zip
