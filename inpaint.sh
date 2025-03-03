@@ -3,7 +3,7 @@
 
 cd lama
 export TORCH_HOME=$(pwd) && export PYTHONPATH=$(pwd)
-python3 bin/predict.py model.path=$(pwd)/big-lama indir=$(pwd)/../data/test_images/blue_fucet outdir=$(pwd)/../data/inpaint_results
+python3 bin/predict.py model.path=$(pwd)/big-lama indir=$(pwd)/../data/rotate/blue_fucet outdir=$(pwd)/../data/inpaint_results
 cd ..
 
 # Optional: Anydoor object inpainting

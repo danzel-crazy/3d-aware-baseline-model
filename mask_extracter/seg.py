@@ -3,7 +3,7 @@ import math
 from PIL import Image, ImageOps
 from transformers import logging
 
-from mask_extracter.mask_extractor import ExternalMaskExtractor
+from mask_extractor import ExternalMaskExtractor
 import os
 from os.path import join, exists, basename, splitext, dirname
 import glob
@@ -11,7 +11,6 @@ import json
 from collections import OrderedDict
 
 logging.set_verbosity_error()
-
 
 
 def load_pil_image(image_path, resolution=512):
@@ -29,23 +28,30 @@ device = 'cuda:0'
 mask_extractor = ExternalMaskExtractor(device=device)
 
 
-
 def inference(image_pil, instruction):
     external_mask_pil, chosen_noun_phrase, clip_scores_dict = mask_extractor.get_external_mask(image_pil, instruction)
     mask_pil = external_mask_pil.resize(image_pil.size)
     mask_pil = mask_pil.convert("L")
     edited_image = Image.composite(image_pil, Image.new("RGB", image_pil.size, (0, 0, 0)), mask_pil)
 
-    #mask the object to white color
-    
-    # Create an all-white image
-    print(image_pil.size)
-    white_image = Image.new("RGB", image_pil.size, (255, 255, 255))  # White image
+    # Ensure the output images are in RGB format
+    edited_image = edited_image.convert("RGB")
 
-    # Apply the mask: Keep white where the mask is white, black otherwise
+    # Create an all-white image
+    white_image = Image.new("RGB", image_pil.size, (255, 255, 255))  # White image
     white_edited_image = Image.composite(white_image, Image.new("RGB", image_pil.size, (0, 0, 0)), mask_pil)
+    white_edited_image = white_edited_image.convert("RGB")
 
     return edited_image, white_edited_image
+
+
+def check_image_mode(image_path):
+    image = Image.open(image_path)
+    if image.mode != "RGB":
+        print(f"Warning: {image_path} is not in RGB mode (Detected: {image.mode})")
+    else:
+        print(f"Success: {image_path} is in RGB mode.")
+
 
 def seg(input_dir, test_set_path):
     print(input_dir)
@@ -73,10 +79,14 @@ def seg(input_dir, test_set_path):
         input_image_path = os.path.join(full_path, 'input.png')
         if exists(input_image_path):
             image_pil = load_pil_image(input_image_path)
-            edit_instruction = 'move the ' + folder_name + 'to the right'  # Replace with your actual instruction
+            edit_instruction = 'move the ' + folder_name + ' to the right'  # Replace with your actual instruction
             edited_image, white_edited_image = inference(image_pil, edit_instruction)
-            edited_image.save(os.path.join(full_path, 'edited_image.png'), format="PNG", optimize=True)
-            white_edited_image.save(os.path.join(full_path, 'mask.png'), format="PNG", optimize=True)
+            edited_image_path = os.path.join(full_path, 'edited_image.png')
+            white_edited_image_path = os.path.join(full_path, 'mask.png')
+            edited_image.save(edited_image_path, format="PNG", optimize=True)
+            white_edited_image.save(white_edited_image_path, format="PNG", optimize=True)
+            check_image_mode(edited_image_path)
+            check_image_mode(white_edited_image_path)
         else:
             print(f"input.png not found in {full_path}")
             
@@ -91,36 +101,27 @@ def seg(input_dir, test_set_path):
                     default_transforms = json.load(f)
             with open(transforms_path, 'w') as f:
                 json.dump(default_transforms, f, indent=4)
-        
+    
     print(incomplete_samples)
 
 
 if __name__ == '__main__':
-    # Different edit instruction and path
-    # image_path = "/tmp2/danzel/mask_extractor/test_images/rotate_mug.jpg"
-    # edit_instruction = 'move the white mug to the right'
-
-
-    # image_path = "/tmp2/danzel/mask_extractor/test_images/rotate_fucet.png"
-    # edit_instruction = 'move the blue fucet to the right'
-
-    image_path = "/tmp2/danzel/mask_extractor/test_images/move_cube.jpg"
-    edit_instruction = 'move the blue cube to the right'
+    image_path = "/tmp2/danzel/zero123/data/rotate/rotate_faucet/input.png"
+    edit_instruction = 'move the blue faucet to the right'
 
     image_name = os.path.basename(image_path).split('.')[0]
     print(f"Image name: {image_name}")
 
     image = load_pil_image(image_path, resolution=512)
-    # image = load_pil_image(image_path, resolution=256)
     image.show()
 
-    #create eobject mask
+    #create object mask
     edited_image, white_edited_image = inference(image, edit_instruction)
-    # edited_image.show()
-    save_path = "/tmp2/danzel/mask_extractor/test_images/" + image_name + "_edited.png"
+    save_path = f"/tmp2/danzel/zero123/data/rotate/rotate_faucet/{image_name}_edited.png"
+    white_save_path = f"/tmp2/danzel/zero123/data/rotate/rotate_faucet/{image_name}_white.png"
     edited_image.save(save_path, format="PNG", optimize=True)
-
-    #create white object mask
-    white_save_path = "/tmp2/danzel/mask_extractor/test_images/" + image_name + "_white.png"
     white_edited_image.save(white_save_path, format="PNG", optimize=True)
-
+    
+    # Check if saved images are in RGB mode
+    check_image_mode(save_path)
+    check_image_mode(white_save_path)

@@ -1,2 +1,4 @@
 /temp_gradio
 /data
+/results
+*.pth

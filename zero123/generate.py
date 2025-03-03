@@ -33,7 +33,7 @@ _SHOW_DESC = True
 _SHOW_INTERMEDIATE = False
 # _SHOW_INTERMEDIATE = True
 # _GPU_INDEX = 3
-_GPU_INDEX = 0
+_GPU_INDEX = 2
 
 # _TITLE = 'Zero-Shot Control of Camera Viewpoints within a Single Image'
 _TITLE = 'Zero-1-to-3: Zero-shot One Image to 3D Object'
@@ -476,8 +476,8 @@ def calc_cam_cone_pts_3d(polar_deg, azimuth_deg, radius_m, fov_deg):
 def process_images(
         input_folder, output_folder,
         device_idx=_GPU_INDEX,
-        ckpt='105000.ckpt',
-        config='configs/sd-objaverse-finetune-c_concat-256.yaml'):
+        ckpt='zero123/105000.ckpt',
+        config='zero123/configs/sd-objaverse-finetune-c_concat-256.yaml'):
     
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)

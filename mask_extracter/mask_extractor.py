@@ -56,7 +56,7 @@ class ExternalMaskExtractor():
         self.groundingdino_model = load_model_hf(ckpt_repo_id, ckpt_filename, ckpt_config_filename)
 
         # Next, load Segment-Anything
-        sam_path = '/tmp2/danzel/mask_extractor/sam_vit_h_4b8939.pth'
+        sam_path = '/tmp2/danzel/zero123/mask_extracter/sam_vit_h_4b8939.pth'
         sam = build_sam(checkpoint=sam_path).to(device)
         self.sam_predictor = SamPredictor(sam)
 
